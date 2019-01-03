@@ -43,42 +43,70 @@ namespace WindowsFormsApp1
 
         public int getX()
         {
-            throw new NotImplementedException();
+            return x;
         }
 
         public int getY()
         {
-            throw new NotImplementedException();
+            return y;
         }
 
-        public void moveTo(int x, int y)
+        public void moveTo(int toX, int toY)
         {
-            throw new NotImplementedException();
+            x = toX;
+            y = toY;
         }
 
-        public void drawLine(int x, int y)
+        public void drawLine(int toX, int toY)
         {
-            throw new NotImplementedException();
+            Graphics graphicsObj = this.CreateGraphics();
+            graphicsObj.DrawLine(myPen, x, y, toX, toY);
+            moveTo(toX, toY);
         }
 
         public void drawRectangle(int width, int height)
         {
-            throw new NotImplementedException();
+            Graphics graphicsObj;
+            graphicsObj = this.CreateGraphics();
+            graphicsObj.DrawRectangle(myPen, x, y, width, height);
+            x = x + width;
+            y = y + height;
         }
 
         public void drawCircle(int radius)
         {
-            throw new NotImplementedException();
+            Graphics graphicsObj;
+            graphicsObj = this.CreateGraphics();
+            x = x - radius / 2;
+            y = y - radius / 2;
+            graphicsObj.DrawEllipse(myPen, x, y, radius / 2, radius / 2);
+            x = x + radius / 2;
+            y = y + radius / 2;
         }
 
-        public void drawTriangle(int b, int height)
+        public void drawTriangle(int width, int height)
         {
-            throw new NotImplementedException();
+            Graphics graphicsObj;
+            graphicsObj = this.CreateGraphics();
+            Point[] p = new Point[3];
+            p[0].X = x;
+            p[0].Y = y;
+
+            p[1].X = x + width;
+            p[1].Y = y;
+
+            p[2].X = x + width;
+            p[2].Y = y - height;
+
+            graphicsObj.DrawPolygon(myPen, p);
+
         }
 
-        public void drawPolygon(Point[] p)
+        public void drawPolygon(Point[] sides)
         {
-            throw new NotImplementedException();
+            Graphics graphicsObj;
+            graphicsObj = this.CreateGraphics();
+            graphicsObj.DrawPolygon(myPen, sides);
         }
     }
 }
